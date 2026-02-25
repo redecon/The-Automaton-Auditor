@@ -1,0 +1,79 @@
+{
+  "rubric_metadata": {
+    "rubric_name": "Week 2: The Automaton Auditor Self-Evaluation",
+    "grading_target": "Week 2 Auditor Repository & Architectural Report",
+    "version": "3.0.0"
+  },
+  "dimensions": [
+    {
+      "id": "git_forensic_analysis",
+      "name": "Git Forensic Analysis",
+      "forensic_instruction": "Inspect commit history for atomic, narrative commits.",
+      "success_pattern": "Commit history shows progression with >3 atomic commits.",
+      "failure_pattern": "Too few commits or large monolithic dumps."
+    },
+    {
+      "id": "state_management_rigor",
+      "name": "State Management Rigor",
+      "forensic_instruction": "Check src/state.py for TypedDict and Pydantic rigor.",
+      "success_pattern": "State defined with TypedDict and validated via Pydantic.",
+      "failure_pattern": "Loose dicts or missing validation."
+    },
+    {
+      "id": "graph_orchestration",
+      "name": "Graph Orchestration",
+      "forensic_instruction": "Inspect src/graph.py for parallel fan-out/fan-in.",
+      "success_pattern": "Detectives run in parallel, aggregated, then judges run in parallel.",
+      "failure_pattern": "Linear execution without orchestration."
+    },
+    {
+      "id": "safe_tool_engineering",
+      "name": "Safe Tool Engineering",
+      "forensic_instruction": "Check src/tools for sandboxing and error handling.",
+      "success_pattern": "Tools use subprocess safely, errors caught.",
+      "failure_pattern": "Direct unsafe calls or missing error handling."
+    },
+    {
+      "id": "structured_output",
+      "name": "Structured Output Enforcement",
+      "forensic_instruction": "Check outputs for Pydantic models and Markdown serialization.",
+      "success_pattern": "Evidence, Opinions, Reports all typed and serialized.",
+      "failure_pattern": "Loose prints or untyped dicts."
+    },
+    {
+      "id": "pdf_theoretical_depth",
+      "name": "PDF Theoretical Depth",
+      "forensic_instruction": "Analyze report for key concepts (Dialectical Synthesis, Fan-In/Fan-Out, Metacognition).",
+      "success_pattern": "Keywords present with substantive explanation.",
+      "failure_pattern": "Buzzwords missing or superficial."
+    },
+    {
+      "id": "host_analysis_accuracy",
+      "name": "Host Analysis Accuracy",
+      "forensic_instruction": "Check if report references files that exist in repo.",
+      "success_pattern": "File paths cross-verified with repo.",
+      "failure_pattern": "Hallucinated or missing file references."
+    },
+    {
+      "id": "diagram_flow",
+      "name": "Diagram Flow Analysis",
+      "forensic_instruction": "Inspect diagrams for Digital Courtroom architecture.",
+      "success_pattern": "Diagram shows Detectives → Aggregator → Judges → Chief Justice.",
+      "failure_pattern": "Diagram missing or incorrect flow."
+    },
+    {
+      "id": "judicial_nuance",
+      "name": "Judicial Nuance",
+      "forensic_instruction": "Check judges for distinct reasoning styles.",
+      "success_pattern": "Prosecutor critical, Defense optimistic, TechLead pragmatic.",
+      "failure_pattern": "Judges all echo same argument."
+    },
+    {
+      "id": "synthesis_conflict_resolution",
+      "name": "Synthesis & Conflict Resolution",
+      "forensic_instruction": "Check Chief Justice synthesis for dissent handling.",
+      "success_pattern": "Conflicts resolved with clear rules, dissent summarized.",
+      "failure_pattern": "No synthesis or ignored dissent."
+    }
+  ]
+}
