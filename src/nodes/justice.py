@@ -1,21 +1,39 @@
+
 from src.state import CriterionResult, AuditReport, JudicialOpinion
 
-def chief_justice(repo_url: str, opinions: list[JudicialOpinion], dimension_id: str, dimension_name: str) -> CriterionResult:
-    # Simple conflict resolution: prioritize TechLead, cap if Prosecutor finds flaw
+# --- Chief Justice ---
+def chief_justice(opinions: list[JudicialOpinion], dimension_id: str, dimension_name: str) -> CriterionResult:
+    """
+    Resolve conflicts among judicial opinions for a given rubric dimension.
+    - Prioritize highest score, but cap if Prosecutor finds a flaw.
+    - Record dissent if judges differ significantly.
+    """
+    if not opinions:
+        return CriterionResult(
+            dimension_id=dimension_id,
+            dimension_name=dimension_name,
+            final_score=1,
+            judge_opinions=[],
+            dissent_summary="No opinions provided.",
+            remediation="Ensure judges append opinions to state.opinions."
+        )
+
     scores = [op.score for op in opinions]
-    final_score = max(scores)  # start with highest score
-    
+    final_score = max(scores)
+
     # Rule of Security: if Prosecutor gave 1, cap at 3
     for op in opinions:
         if op.judge == "Prosecutor" and op.score == 1:
             final_score = min(final_score, 3)
-    
+
     dissent_summary = None
     if max(scores) - min(scores) > 2:
-        dissent_summary = "Judges disagreed significantly: " + ", ".join([f"{op.judge}={op.score}" for op in opinions])
-    
+        dissent_summary = "Judges disagreed significantly: " + ", ".join(
+            [f"{op.judge}={op.score}" for op in opinions]
+        )
+
     remediation = "Review src/state.py and src/graph.py for proper parallel orchestration."
-    
+
     return CriterionResult(
         dimension_id=dimension_id,
         dimension_name=dimension_name,
@@ -25,11 +43,27 @@ def chief_justice(repo_url: str, opinions: list[JudicialOpinion], dimension_id: 
         remediation=remediation,
     )
 
+# --- Audit Report Generator ---
 def generate_audit_report(repo_url: str, criteria: list[CriterionResult]) -> AuditReport:
+    """
+    Aggregate all CriterionResults into a single AuditReport.
+    - Reads immutable repo_url.
+    - Computes overall score.
+    - Concatenates remediation plans.
+    """
+    if not criteria:
+        return AuditReport(
+            repo_url=repo_url,
+            executive_summary=f"Audit completed for {repo_url}. No criteria evaluated.",
+            overall_score=0.0,
+            criteria=[],
+            remediation_plan="No remediation available."
+        )
+
     overall_score = sum([c.final_score for c in criteria]) / len(criteria)
     executive_summary = f"Audit completed for {repo_url}. Overall score: {overall_score:.2f}."
     remediation_plan = "\n".join([c.remediation for c in criteria])
-    
+
     return AuditReport(
         repo_url=repo_url,
         executive_summary=executive_summary,
@@ -38,8 +72,13 @@ def generate_audit_report(repo_url: str, criteria: list[CriterionResult]) -> Aud
         remediation_plan=remediation_plan,
     )
 
+# --- Markdown Serializer ---
 def serialize_report_to_markdown(report: AuditReport, output_path: str):
-    """Convert AuditReport into a structured Markdown file."""
+    """
+    Convert AuditReport into a structured Markdown file.
+    - Safe read-only serialization.
+    - Writes to controlled path.
+    """
     lines = []
     lines.append(f"# Audit Report for {report.repo_url}\n")
     lines.append(f"**Executive Summary:** {report.executive_summary}\n")
@@ -57,6 +96,5 @@ def serialize_report_to_markdown(report: AuditReport, output_path: str):
     lines.append("\n## Remediation Plan\n")
     lines.append(report.remediation_plan)
 
-    # Write to file
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))

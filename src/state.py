@@ -1,6 +1,9 @@
 from typing import Annotated, List, Dict
 import operator
 from pydantic import BaseModel, conint, confloat
+from pydantic import BaseModel 
+from typing import List, Optional
+\
 
 class Evidence(BaseModel):
     goal: str
@@ -8,45 +11,46 @@ class Evidence(BaseModel):
     content: str
     location: str
     rationale: str
-    confidence: confloat(ge=0.0, le=1.0)  # confidence between 0 and 1
+    confidence: confloat(ge=0.0, le=1.0)
+
 
 class JudicialOpinion(BaseModel):
     judge: str
-    criterion_id: str
-    score: conint(ge=1, le=5)  # score between 1 and 5
-    argument: str
-    cited_evidence: List[str]
+    criterion: Optional[str] = "all"
+    verdict: Optional[str] = ""
+    score: int = 0
+    cited_evidence: List[str] = []
+    dissent: Optional[str] = ""
+    argument: Optional[str] = ""
+      # optional dissent notes
 
 class CriterionResult(BaseModel):
     dimension_id: str
     dimension_name: str
-    final_score: conint(ge=1, le=5)
-    judge_opinions: List[JudicialOpinion]
-    dissent_summary: str | None
+    final_score: int
+    judge_opinions: List[JudicialOpinion]   
+    dissent_summary: Optional[str] = None
     remediation: str
 
 class AuditReport(BaseModel):
     repo_url: str
     executive_summary: str
-    overall_score: confloat(ge=0.0, le=5.0)
+    overall_score: float
     criteria: List[CriterionResult]
     remediation_plan: str
 
+
 class AgentState(BaseModel):
-    # Immutable fields (set once, not rewritten)
+    # Immutable/read-only fields
     repo_url: str
     pdf_path: str
     rubric_dimensions: List[Dict]
 
     # Reducers for parallel writes
-    evidences: Annotated[
-        Dict[str, List[Evidence]],
-        operator.ior   # merge dicts
-    ]
-    opinions: Annotated[
-        List[JudicialOpinion],
-        operator.add   # append lists
-    ]
+    evidences: Annotated[Dict[str, List[Evidence]], operator.ior]
+    opinions: Annotated[List[JudicialOpinion], operator.add]
+    errors: Annotated[List[str], operator.add]
+    criteria_results: Annotated[List[CriterionResult], operator.add]
 
     # Single final report
     final_report: AuditReport | None

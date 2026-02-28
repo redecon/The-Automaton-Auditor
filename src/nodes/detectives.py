@@ -3,39 +3,81 @@ import os
 import re
 from src.state import AgentState, Evidence
 from src.tools import repo_tools, doc_tools, vision_tools
+import ast
+# --- Git Forensic Analysis ---
 
-# --- Repo Investigator ---
-def repo_investigator(state: AgentState, dimension: dict) -> AgentState:
+
+
+def git_forensic_analysis(state: AgentState, dimension: dict) -> AgentState:
     try:
+        # Clone repo and extract commits
         repo_path = repo_tools.clone_repo(state.repo_url)
         commits = repo_tools.extract_git_history(repo_path)
 
-        found = len(commits) > 3
+        structural_patterns = []
+        graph_file = os.path.join(repo_path, "src", "graph.py")
+        if os.path.exists(graph_file):
+            with open(graph_file, "r", encoding="utf-8") as f:
+                tree = ast.parse(f.read(), filename="graph.py")
+
+            # Look for StateGraph instantiation
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+                    if node.func.id == "StateGraph":
+                        structural_patterns.append("StateGraph instantiation found")
+
+            # Look for add_node / add_edge calls
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                    if node.func.attr == "add_edge":
+                        structural_patterns.append("add_edge call found")
+                    if node.func.attr == "add_node":
+                        structural_patterns.append("add_node call found")
+
+            # Detect fan-out wiring: multiple edges from 'entry'
+            fanout_edges = 0
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                    if node.func.attr == "add_edge" and len(node.args) >= 2:
+                        src = getattr(node.args[0], "s", None) or getattr(node.args[0], "value", None)
+                        if src == "entry":
+                            fanout_edges += 1
+            if fanout_edges > 1:
+                structural_patterns.append(f"Fan-out wiring detected: {fanout_edges} edges from entry")
+
+            # Detect reducer usage (aggregator node)
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef) and node.name == "aggregate_node":
+                    structural_patterns.append("Aggregator (reducer) function found")
+
+        # Evidence logic
+        found = len(commits) > 3 and len(structural_patterns) > 0
         rationale = dimension["success_pattern"] if found else dimension["failure_pattern"]
 
         evidence = Evidence(
             goal=dimension["name"],
             found=found,
-            content=str(commits),
-            location=repo_path,
+            content=f"Commits: {len(commits)} | Structural patterns: {structural_patterns}",
+            location="git_forensic_analysis",
             rationale=rationale,
             confidence=0.9 if found else 0.5,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
             found=False,
             content=str(e),
-            location=state.repo_url,
+            location="git_forensic_analysis",
             rationale="Error cloning or analyzing repo",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
 
-# --- Doc Analyst ---
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
+
+
+# --- PDF Theoretical Depth (doc_analyst) ---
 def doc_analyst(state: AgentState, dimension: dict) -> AgentState:
     try:
         chunks = doc_tools.ingest_pdf(state.pdf_path, chunk_size=500)
@@ -49,26 +91,24 @@ def doc_analyst(state: AgentState, dimension: dict) -> AgentState:
             goal=dimension["name"],
             found=found,
             content=str(results),
-            location=state.pdf_path,
+            location="doc_analyst",
             rationale=rationale,
             confidence=0.8 if found else 0.4,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
             found=False,
             content=str(e),
-            location=state.pdf_path,
+            location="doc_analyst",
             rationale="Error parsing PDF",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
 
-# --- Vision Inspector ---
-def vision_inspector(state: AgentState, dimension: dict) -> AgentState:
+# --- Diagram Flow Analysis ---
+def diagram_flow(state: AgentState, dimension: dict) -> AgentState:
     try:
         images = vision_tools.extract_images_from_pdf(state.pdf_path)
         classifications = [vision_tools.classify_diagram_flow(img) for img in images]
@@ -80,23 +120,21 @@ def vision_inspector(state: AgentState, dimension: dict) -> AgentState:
             goal=dimension["name"],
             found=found,
             content=str(classifications),
-            location=state.pdf_path,
+            location="diagram_flow",
             rationale=rationale,
             confidence=0.7 if found else 0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
             found=False,
             content=str(e),
-            location=state.pdf_path,
+            location="diagram_flow",
             rationale="Error extracting diagrams",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
 
 # --- Host Analysis Accuracy ---
 def host_analysis_accuracy(state: AgentState, dimension: dict) -> AgentState:
@@ -118,23 +156,21 @@ def host_analysis_accuracy(state: AgentState, dimension: dict) -> AgentState:
             goal=dimension["name"],
             found=found,
             content=f"References: {file_refs}, Missing: {missing}",
-            location=state.pdf_path,
+            location="host_analysis_accuracy",
             rationale=rationale,
             confidence=0.9 if found else 0.5,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
             found=False,
             content=str(e),
-            location=state.pdf_path,
+            location="host_analysis_accuracy",
             rationale="Error parsing PDF or repo",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
 
 # --- State Management Rigor ---
 def state_management_rigor(state: AgentState, dimension: dict) -> AgentState:
@@ -152,8 +188,6 @@ def state_management_rigor(state: AgentState, dimension: dict) -> AgentState:
             rationale=rationale,
             confidence=0.9 if found else 0.5,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
@@ -163,8 +197,8 @@ def state_management_rigor(state: AgentState, dimension: dict) -> AgentState:
             rationale="Error reading state.py",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
 
 # --- Graph Orchestration ---
 def graph_orchestration(state: AgentState, dimension: dict) -> AgentState:
@@ -182,8 +216,6 @@ def graph_orchestration(state: AgentState, dimension: dict) -> AgentState:
             rationale=rationale,
             confidence=0.9 if found else 0.5,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
@@ -193,8 +225,8 @@ def graph_orchestration(state: AgentState, dimension: dict) -> AgentState:
             rationale="Error reading graph.py",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
 
 # --- Safe Tool Engineering ---
 def safe_tool_engineering(state: AgentState, dimension: dict) -> AgentState:
@@ -212,8 +244,6 @@ def safe_tool_engineering(state: AgentState, dimension: dict) -> AgentState:
             rationale=rationale,
             confidence=0.9 if found else 0.5,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
@@ -223,13 +253,13 @@ def safe_tool_engineering(state: AgentState, dimension: dict) -> AgentState:
             rationale="Error reading repo_tools.py",
             confidence=0.3,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
 
 # --- Structured Output Enforcement ---
-def structured_output_enforcement(state: AgentState, dimension: dict) -> AgentState:
+def structured_output(state: AgentState, dimension: dict) -> AgentState:
+    files = ["src/state.py", "src/nodes/justice.py"]
     try:
-        files = ["src/state.py", "src/nodes/justice.py"]
         found = True
         for file in files:
             with open(file, "r", encoding="utf-8") as f:
@@ -242,18 +272,18 @@ def structured_output_enforcement(state: AgentState, dimension: dict) -> AgentSt
             goal=dimension["name"],
             found=found,
             content="Checked for structured Evidence output",
-            location=str(files),
+            location="structured_output",
             rationale=rationale,
             confidence=0.9 if found else 0.5,
         )
-        state.evidences.setdefault(dimension["id"], []).append(evidence)
-        return state
     except Exception as e:
         evidence = Evidence(
             goal=dimension["name"],
             found=False,
             content=str(e),
-            location=str(files),
+            location="structured_output",
             rationale="Error reading files",
-            confidence=0.3
+            confidence=0.3,
         )
+    state.evidences.setdefault(dimension["id"], []).append(evidence)
+    return state
