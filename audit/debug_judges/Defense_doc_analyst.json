@@ -1,0 +1,232 @@
+{
+  "raw": {
+    "dimension_id": "doc_analyst",
+    "judge": "Defense",
+    "criterion": "all",
+    "verdict": "",
+    "score": 3,
+    "cited_evidence": [],
+    "dissent": "",
+    "argument": "Documentation or examples missing"
+  },
+  "evidence_payload": {
+    "evidence": [
+      {
+        "goal": "PDF Theoretical Depth",
+        "found": true,
+        "content": {
+          "found_files": [
+            "README.md"
+          ],
+          "summary": "Found 1 doc artifacts"
+        },
+        "location": "doc_analyst",
+        "rationale": "Keywords present with substantive explanation.",
+        "confidence": 0.9
+      }
+    ],
+    "aggregate": [
+      {
+        "goal": "git",
+        "found": true,
+        "content": {
+          "commit_count": 9,
+          "commit_shas": [
+            "0bd4110eea6d7126db72bfde0467cf8a3273c076",
+            "bfd3b502d0bf545cb2de0eba537b3e60400fb3a9",
+            "77c176ebc442d48508f25c7056885a26d0d8078b",
+            "385b4cb608889b7fcbacad9b7110405cda228f27",
+            "17611a1e430e26870efd57e04957d7a009262a51",
+            "4c9a076916c64e037ba0e27ec67e2aac840c08d8",
+            "44a86f9ca26ba46868a045ba812fa12b4aec2b07",
+            "b6f7b7295f87a84d594ae99bd3ba47dda2adff0e",
+            "0a3337a7304ded007d6c980f7d7f840ddeab61cc"
+          ],
+          "recent_commits": [
+            "Add peer audit and peer-received report artifacts",
+            "Normalize detector outputs; allow structured Evidence.content; add doc/diagram wrappers",
+            "Display scores as X/Y; add computed mean transparency; remove debug",
+            "Fix judges to set dimension_id; harden graph normalization; remove debug",
+            "Update .gitignore to ignore __pycache__, .venv, and .env files"
+          ]
+        },
+        "location": "src.detectors.sample_detector",
+        "rationale": "auto-collected evidence",
+        "confidence": 0.5
+      },
+      {
+        "goal": "schema",
+        "found": true,
+        "content": {
+          "schema_files": []
+        },
+        "location": "src.detectors.sample_detector",
+        "rationale": "auto-collected evidence",
+        "confidence": 0.5
+      },
+      {
+        "goal": "diagrams",
+        "found": true,
+        "content": {
+          "diagram_count": 0,
+          "diagram_paths": []
+        },
+        "location": "src.detectors.sample_detector",
+        "rationale": "auto-collected evidence",
+        "confidence": 0.5
+      },
+      {
+        "goal": "orchestration",
+        "found": true,
+        "content": {
+          "orchestration": {
+            "uses_async": true,
+            "graph_files": []
+          }
+        },
+        "location": "src.detectors.sample_detector",
+        "rationale": "auto-collected evidence",
+        "confidence": 0.5
+      },
+      {
+        "goal": "docs",
+        "found": true,
+        "content": {
+          "docs": [
+            "README.md"
+          ]
+        },
+        "location": "src.detectors.sample_detector",
+        "rationale": "auto-collected evidence",
+        "confidence": 0.5
+      },
+      {
+        "goal": "hosts",
+        "found": true,
+        "content": {
+          "hosts": []
+        },
+        "location": "src.detectors.sample_detector",
+        "rationale": "auto-collected evidence",
+        "confidence": 0.5
+      },
+      {
+        "goal": "PDF Theoretical Depth",
+        "found": true,
+        "content": {
+          "found_files": [
+            "README.md"
+          ],
+          "summary": "Found 1 doc artifacts"
+        },
+        "location": "doc_analyst",
+        "rationale": "Keywords present with substantive explanation.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "Graph Orchestration",
+        "found": true,
+        "content": "Checked for StateGraph orchestration",
+        "location": "src/graph.py",
+        "rationale": "Detectives run in parallel, aggregated, then judges run in parallel.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "Safe Tool Engineering",
+        "found": true,
+        "content": "Checked for safe subprocess usage",
+        "location": "src/tools/repo_tools.py",
+        "rationale": "Tools use subprocess safely, errors caught.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "State Management Rigor",
+        "found": false,
+        "content": "Checked for BaseModel and TypedDict usage",
+        "location": "src/state.py",
+        "rationale": "Loose dicts or missing validation.",
+        "confidence": 0.5
+      },
+      {
+        "goal": "Structured Output Enforcement",
+        "found": true,
+        "content": "Checked for structured Evidence output",
+        "location": "structured_output",
+        "rationale": "Evidence, Opinions, Reports all typed and serialized.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "Git Forensic Analysis",
+        "found": false,
+        "content": {
+          "commit_count": 9,
+          "commit_shas": [
+            "0bd4110eea6d7126db72bfde0467cf8a3273c076",
+            "bfd3b502d0bf545cb2de0eba537b3e60400fb3a9",
+            "77c176ebc442d48508f25c7056885a26d0d8078b",
+            "385b4cb608889b7fcbacad9b7110405cda228f27",
+            "17611a1e430e26870efd57e04957d7a009262a51",
+            "4c9a076916c64e037ba0e27ec67e2aac840c08d8",
+            "44a86f9ca26ba46868a045ba812fa12b4aec2b07",
+            "b6f7b7295f87a84d594ae99bd3ba47dda2adff0e",
+            "0a3337a7304ded007d6c980f7d7f840ddeab61cc"
+          ],
+          "recent_commits": [
+            "Add peer audit and peer-received report artifacts",
+            "Normalize detector outputs; allow structured Evidence.content; add doc/diagram wrappers",
+            "Display scores as X/Y; add computed mean transparency; remove debug",
+            "Fix judges to set dimension_id; harden graph normalization; remove debug",
+            "Update .gitignore to ignore __pycache__, .venv, and .env files"
+          ],
+          "commits": [],
+          "signed_commits": 0,
+          "recent_activity_days": null,
+          "error": null
+        },
+        "location": "git_forensic_analysis",
+        "rationale": "Too few commits or large monolithic dumps.",
+        "confidence": 0.3
+      },
+      {
+        "goal": "Host Analysis Accuracy",
+        "found": true,
+        "content": {
+          "references": [],
+          "missing": []
+        },
+        "location": "host_analysis_accuracy",
+        "rationale": "File paths cross-verified with repo.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "Diagram Flow Analysis",
+        "found": true,
+        "content": {
+          "diagram_files": [
+            "reports\\Credit Risk Probability Model for Alternative Data.pdf"
+          ],
+          "summary": "Found 1 diagram files"
+        },
+        "location": "diagram_flow",
+        "rationale": "Diagram shows Detectives → Aggregator → Judges → Chief Justice.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "Judicial Nuance",
+        "found": true,
+        "content": "Distinct reasoning styles observed: Prosecutor, Defense, TechLead",
+        "location": "src/nodes/judges.py",
+        "rationale": "Prosecutor critical, Defense optimistic, TechLead pragmatic.",
+        "confidence": 0.8
+      },
+      {
+        "goal": "Synthesis & Conflict Resolution",
+        "found": true,
+        "content": "Chief Justice synthesis with dissent summary",
+        "location": "src/nodes/justice.py",
+        "rationale": "Conflicts resolved with clear rules, dissent summarized.",
+        "confidence": 0.9
+      }
+    ]
+  }
+}

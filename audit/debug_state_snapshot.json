@@ -1,0 +1,324 @@
+{
+  "opinions": [
+    {
+      "dimension_id": "diagram_flow",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Diagrams missing or unclear"
+    },
+    {
+      "dimension_id": "doc_analyst",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Documentation or examples missing"
+    },
+    {
+      "dimension_id": "git_forensic_analysis",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 4,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Optimistic lens: rewarding effort"
+    },
+    {
+      "dimension_id": "graph_orchestration",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 4,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Optimistic lens: rewarding effort"
+    },
+    {
+      "dimension_id": "host_analysis_accuracy",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 2,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Limited evidence"
+    },
+    {
+      "dimension_id": "judicial_nuance",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 4,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Optimistic lens: rewarding effort"
+    },
+    {
+      "dimension_id": "safe_tool_engineering",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 4,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Optimistic lens: rewarding effort"
+    },
+    {
+      "dimension_id": "state_management_rigor",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 4,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Optimistic lens: rewarding effort"
+    },
+    {
+      "dimension_id": "structured_output",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Documentation or examples missing"
+    },
+    {
+      "dimension_id": "synthesis_conflict_resolution",
+      "judge": "Defense",
+      "criterion": "all",
+      "verdict": "",
+      "score": 4,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Optimistic lens: rewarding effort"
+    },
+    {
+      "dimension_id": "diagram_flow",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Evidence exists but scrutinized"
+    },
+    {
+      "dimension_id": "doc_analyst",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Evidence exists but scrutinized"
+    },
+    {
+      "dimension_id": "git_forensic_analysis",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 1,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Missing commit history or provenance"
+    },
+    {
+      "dimension_id": "graph_orchestration",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Evidence exists but scrutinized"
+    },
+    {
+      "dimension_id": "host_analysis_accuracy",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 1,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Host fingerprints missing"
+    },
+    {
+      "dimension_id": "judicial_nuance",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Evidence exists but scrutinized"
+    },
+    {
+      "dimension_id": "safe_tool_engineering",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 1,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Tool safety tests absent"
+    },
+    {
+      "dimension_id": "state_management_rigor",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Evidence exists but scrutinized"
+    },
+    {
+      "dimension_id": "structured_output",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 1,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "No output schema found"
+    },
+    {
+      "dimension_id": "synthesis_conflict_resolution",
+      "judge": "Prosecutor",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Evidence exists but scrutinized"
+    },
+    {
+      "dimension_id": "diagram_flow",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Pragmatic lens: maintainability check"
+    },
+    {
+      "dimension_id": "doc_analyst",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Pragmatic lens: maintainability check"
+    },
+    {
+      "dimension_id": "git_forensic_analysis",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Pragmatic lens: maintainability check"
+    },
+    {
+      "dimension_id": "graph_orchestration",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 2,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Orchestration artifacts missing; check node contracts"
+    },
+    {
+      "dimension_id": "host_analysis_accuracy",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 1,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Technical artifacts missing"
+    },
+    {
+      "dimension_id": "judicial_nuance",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Pragmatic lens: maintainability check"
+    },
+    {
+      "dimension_id": "safe_tool_engineering",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Pragmatic lens: maintainability check"
+    },
+    {
+      "dimension_id": "state_management_rigor",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 2,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "State tests and snapshots missing"
+    },
+    {
+      "dimension_id": "structured_output",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 2,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "No schema for outputs; risk of brittle consumers"
+    },
+    {
+      "dimension_id": "synthesis_conflict_resolution",
+      "judge": "TechLead",
+      "criterion": "all",
+      "verdict": "",
+      "score": 3,
+      "cited_evidence": [],
+      "dissent": "",
+      "argument": "Pragmatic lens: maintainability check"
+    }
+  ],
+  "errors": [],
+  "evidences_keys": [
+    "git",
+    "schema",
+    "diagrams",
+    "orchestration",
+    "docs",
+    "hosts",
+    "doc_analyst",
+    "graph_orchestration",
+    "safe_tool_engineering",
+    "state_management_rigor",
+    "structured_output",
+    "git_forensic_analysis",
+    "host_analysis_accuracy",
+    "diagram_flow",
+    "judicial_nuance",
+    "synthesis_conflict_resolution",
+    "aggregate"
+  ]
+}
