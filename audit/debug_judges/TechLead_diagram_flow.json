@@ -16,9 +16,11 @@
         "found": true,
         "content": {
           "diagram_files": [
-            "reports\\Credit Risk Probability Model for Alternative Data.pdf"
+            "reports\\Final_Report.pdf",
+            "reports\\Figures\\Copilot_20260228_222559.png",
+            "reports\\Figures\\image.png"
           ],
-          "summary": "Found 1 diagram files"
+          "summary": "Found 3 diagram files"
         },
         "location": "diagram_flow",
         "rationale": "Diagram shows Detectives → Aggregator → Judges → Chief Justice.",
@@ -30,8 +32,11 @@
         "goal": "git",
         "found": true,
         "content": {
-          "commit_count": 9,
+          "commit_count": 12,
           "commit_shas": [
+            "da9caacd23ad8ef3415310742d1dc2a767ee4a1f",
+            "e7776359651565922daf61ef905e1089ddf409b4",
+            "d3e0fa8634117a9fe4c5e27ae6902d7e85eaaac1",
             "0bd4110eea6d7126db72bfde0467cf8a3273c076",
             "bfd3b502d0bf545cb2de0eba537b3e60400fb3a9",
             "77c176ebc442d48508f25c7056885a26d0d8078b",
@@ -43,11 +48,11 @@
             "0a3337a7304ded007d6c980f7d7f840ddeab61cc"
           ],
           "recent_commits": [
+            "Add smoke tests for detectors and peer repo checks",
+            "Add LangSmith REST fallback helper and safe serialization in graph",
+            "Describe one focused change: e.g. add safe_serialize helper",
             "Add peer audit and peer-received report artifacts",
-            "Normalize detector outputs; allow structured Evidence.content; add doc/diagram wrappers",
-            "Display scores as X/Y; add computed mean transparency; remove debug",
-            "Fix judges to set dimension_id; harden graph normalization; remove debug",
-            "Update .gitignore to ignore __pycache__, .venv, and .env files"
+            "Normalize detector outputs; allow structured Evidence.content; add doc/diagram wrappers"
           ]
         },
         "location": "src.detectors.sample_detector",
@@ -132,12 +137,14 @@
         "confidence": 0.9
       },
       {
-        "goal": "Safe Tool Engineering",
-        "found": true,
-        "content": "Checked for safe subprocess usage",
-        "location": "src/tools/repo_tools.py",
-        "rationale": "Tools use subprocess safely, errors caught.",
-        "confidence": 0.9
+        "goal": "Host Analysis Accuracy",
+        "found": false,
+        "content": {
+          "error": "Error reading PDF: [Errno 2] No such file or directory: 'reports/Credit Risk Probability Model for Alternative Data.pdf'"
+        },
+        "location": "host_analysis_accuracy",
+        "rationale": "Error parsing PDF or repo",
+        "confidence": 0.3
       },
       {
         "goal": "State Management Rigor",
@@ -156,11 +163,37 @@
         "confidence": 0.9
       },
       {
+        "goal": "Safe Tool Engineering",
+        "found": true,
+        "content": "Checked for safe subprocess usage",
+        "location": "src/tools/repo_tools.py",
+        "rationale": "Tools use subprocess safely, errors caught.",
+        "confidence": 0.9
+      },
+      {
+        "goal": "Diagram Flow Analysis",
+        "found": true,
+        "content": {
+          "diagram_files": [
+            "reports\\Final_Report.pdf",
+            "reports\\Figures\\Copilot_20260228_222559.png",
+            "reports\\Figures\\image.png"
+          ],
+          "summary": "Found 3 diagram files"
+        },
+        "location": "diagram_flow",
+        "rationale": "Diagram shows Detectives → Aggregator → Judges → Chief Justice.",
+        "confidence": 0.9
+      },
+      {
         "goal": "Git Forensic Analysis",
         "found": false,
         "content": {
-          "commit_count": 9,
+          "commit_count": 12,
           "commit_shas": [
+            "da9caacd23ad8ef3415310742d1dc2a767ee4a1f",
+            "e7776359651565922daf61ef905e1089ddf409b4",
+            "d3e0fa8634117a9fe4c5e27ae6902d7e85eaaac1",
             "0bd4110eea6d7126db72bfde0467cf8a3273c076",
             "bfd3b502d0bf545cb2de0eba537b3e60400fb3a9",
             "77c176ebc442d48508f25c7056885a26d0d8078b",
@@ -172,11 +205,11 @@
             "0a3337a7304ded007d6c980f7d7f840ddeab61cc"
           ],
           "recent_commits": [
+            "Add smoke tests for detectors and peer repo checks",
+            "Add LangSmith REST fallback helper and safe serialization in graph",
+            "Describe one focused change: e.g. add safe_serialize helper",
             "Add peer audit and peer-received report artifacts",
-            "Normalize detector outputs; allow structured Evidence.content; add doc/diagram wrappers",
-            "Display scores as X/Y; add computed mean transparency; remove debug",
-            "Fix judges to set dimension_id; harden graph normalization; remove debug",
-            "Update .gitignore to ignore __pycache__, .venv, and .env files"
+            "Normalize detector outputs; allow structured Evidence.content; add doc/diagram wrappers"
           ],
           "commits": [],
           "signed_commits": 0,
@@ -186,30 +219,6 @@
         "location": "git_forensic_analysis",
         "rationale": "Too few commits or large monolithic dumps.",
         "confidence": 0.3
-      },
-      {
-        "goal": "Host Analysis Accuracy",
-        "found": true,
-        "content": {
-          "references": [],
-          "missing": []
-        },
-        "location": "host_analysis_accuracy",
-        "rationale": "File paths cross-verified with repo.",
-        "confidence": 0.9
-      },
-      {
-        "goal": "Diagram Flow Analysis",
-        "found": true,
-        "content": {
-          "diagram_files": [
-            "reports\\Credit Risk Probability Model for Alternative Data.pdf"
-          ],
-          "summary": "Found 1 diagram files"
-        },
-        "location": "diagram_flow",
-        "rationale": "Diagram shows Detectives → Aggregator → Judges → Chief Justice.",
-        "confidence": 0.9
       },
       {
         "goal": "Judicial Nuance",
