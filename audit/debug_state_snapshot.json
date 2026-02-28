@@ -45,10 +45,10 @@
       "judge": "Defense",
       "criterion": "all",
       "verdict": "",
-      "score": 2,
+      "score": 4,
       "cited_evidence": [],
       "dissent": "",
-      "argument": "Limited evidence"
+      "argument": "Optimistic lens: rewarding effort"
     },
     {
       "dimension_id": "judicial_nuance",
@@ -245,10 +245,10 @@
       "judge": "TechLead",
       "criterion": "all",
       "verdict": "",
-      "score": 1,
+      "score": 3,
       "cited_evidence": [],
       "dissent": "",
-      "argument": "Technical artifacts missing"
+      "argument": "Pragmatic lens: maintainability check"
     },
     {
       "dimension_id": "judicial_nuance",
@@ -311,12 +311,12 @@
     "hosts",
     "doc_analyst",
     "graph_orchestration",
-    "safe_tool_engineering",
+    "host_analysis_accuracy",
     "state_management_rigor",
     "structured_output",
-    "git_forensic_analysis",
-    "host_analysis_accuracy",
+    "safe_tool_engineering",
     "diagram_flow",
+    "git_forensic_analysis",
     "judicial_nuance",
     "synthesis_conflict_resolution",
     "aggregate"

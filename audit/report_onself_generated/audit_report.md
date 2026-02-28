@@ -2,7 +2,7 @@
 
 **Executive Summary:** Automated audit run
 
-**Overall Score:** 2.70 / 5.00 — 54%
+**Overall Score:** 2.90 / 5.00 — 58%
 
 ## Criterion Breakdown
 
@@ -70,13 +70,15 @@ _Computed mean (for transparency): 3.00 / 5.00_
 
 **Remediation:** Review opinions and evidence.
 
-### Host Analysis Accuracy (Score: 1 / 5.0)
+### Host Analysis Accuracy (Score: 3 / 5.0)
 
-_Computed mean (for transparency): 1.33 / 5.00_
+_Computed mean (for transparency): 2.67 / 5.00_
 
-- **Defense** (2): Limited evidence
+- **Defense** (4): Optimistic lens: rewarding effort
 - **Prosecutor** (1): Host fingerprints missing
-- **TechLead** (1): Technical artifacts missing
+- **TechLead** (3): Pragmatic lens: maintainability check
+
+**Dissent:** Judges disagreed significantly: Defense=4, Prosecutor=1, TechLead=3
 
 **Remediation:** Review opinions and evidence.
 
