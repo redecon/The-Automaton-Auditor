@@ -1,38 +1,46 @@
-from typing import Annotated, List, Dict
+from typing import Annotated, List, Dict, Optional
 import operator
 from pydantic import BaseModel, conint, confloat
-from pydantic import BaseModel 
-from typing import List, Optional
-\
+
+
+# --- Evidence Model ---
+from typing import Union, Dict, Any, Optional
+from pydantic import BaseModel
 
 class Evidence(BaseModel):
     goal: str
     found: bool
-    content: str
-    location: str
-    rationale: str
-    confidence: confloat(ge=0.0, le=1.0)
+    content: Optional[Union[str, Dict[str, Any]]] = None
+    location: Optional[str] = None
+    rationale: Optional[str] = None
+    confidence: Optional[float] = None
 
 
+# --- Judicial Opinion ---
 class JudicialOpinion(BaseModel):
-    judge: str
-    criterion: Optional[str] = "all"
-    verdict: Optional[str] = ""
-    score: int = 0
-    cited_evidence: List[str] = []
-    dissent: Optional[str] = ""
-    argument: Optional[str] = ""
-      # optional dissent notes
+    dimension_id: str                  # REQUIRED: ties opinion to rubric dimension
+    judge: str                         # e.g., "Prosecutor", "Defense", "TechLead"
+    criterion: Optional[str] = "all"   # optional: which criterion within dimension
+    verdict: Optional[str] = ""        # textual verdict
+    score: conint(ge=0, le=10) = 0     # numeric score 0–10
+    cited_evidence: List[str] = []     # references to Evidence IDs
+    dissent: Optional[str] = ""        # optional dissent notes
+    argument: Optional[str] = ""       # reasoning narrative
 
+
+# --- Criterion Result ---
 class CriterionResult(BaseModel):
     dimension_id: str
     dimension_name: str
     final_score: int
-    judge_opinions: List[JudicialOpinion]   
+    judge_opinions: List[JudicialOpinion]
     dissent_summary: Optional[str] = None
     remediation: str
 
+
+# --- Audit Report ---
 class AuditReport(BaseModel):
+    max_score: float = 5.0
     repo_url: str
     executive_summary: str
     overall_score: float
@@ -40,10 +48,11 @@ class AuditReport(BaseModel):
     remediation_plan: str
 
 
+# --- Agent State ---
 class AgentState(BaseModel):
     # Immutable/read-only fields
     repo_url: str
-    pdf_path: str
+    pdf_path: Optional[str] = None
     rubric_dimensions: List[Dict]
 
     # Reducers for parallel writes
@@ -53,4 +62,4 @@ class AgentState(BaseModel):
     criteria_results: Annotated[List[CriterionResult], operator.add]
 
     # Single final report
-    final_report: AuditReport | None
+    final_report: Optional[AuditReport] = None
