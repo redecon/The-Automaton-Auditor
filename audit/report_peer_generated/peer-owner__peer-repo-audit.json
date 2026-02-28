@@ -1,0 +1,12 @@
+{
+  "generated_by_agent_version": "local-dev",
+  "generated_at": "2026-02-28T14:21:26.678246Z",
+  "source_repo": "C:\\Users\\mella\\week2\\The-Automaton-Auditor",
+  "target_repo": "https://github.com/Miked1991/digital-courtroom",
+  "executive_summary": "Automated peer audit run (local)",
+  "overall_score": 3.0,
+  "criteria": [],
+  "judicial_opinions": [],
+  "remediation_plan": "Add README with usage examples; include AuditReport JSON at audit/report_onself_generated/audit_report.json",
+  "repo_url": "https://github.com/Miked1991/digital-courtroom"
+}
