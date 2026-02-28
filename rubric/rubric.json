@@ -41,7 +41,7 @@
       "failure_pattern": "Loose prints or untyped dicts."
     },
     {
-      "id": "pdf_theoretical_depth",
+      "id": "doc_analyst",
       "name": "PDF Theoretical Depth",
       "forensic_instruction": "Analyze report for key concepts (Dialectical Synthesis, Fan-In/Fan-Out, Metacognition).",
       "success_pattern": "Keywords present with substantive explanation.",
